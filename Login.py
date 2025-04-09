@@ -7,15 +7,19 @@ def login():
     password = password_entry.get()
     
     if username == "admin" and password == "password":
-        messagebox.showinfo("Login Successful", "Welcome!")
+        messagebox.showinfo("🌟 Login Successful", f"Welcome, {username}!🥳")
     else:
-        messagebox.showerror("Login Failed", "Invalid username or password")
+        messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
 
 
 def main():
     root = tk.Tk()
-    root.title("User View")
-    root.geometry("600x600")
+    root.title("🌟 Login Portal 🌟")
+    root.geometry("400x300")
+    root.configure(bg="#FFFDF2")
+
+    title = tk.Label(root, text="✨ Welcome!", font=("Style Script", 18, "bold"), bg="#FFFDF2", fg="#000000")
+    title.pack(pady=15)
 
     frame = tk.Frame(root)
     frame.pack(expand=True)
