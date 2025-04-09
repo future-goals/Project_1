@@ -14,7 +14,7 @@ def login():
 def main():
     root = tk.Tk()
     root.title("User View")
-    root.geometry("600x800")
+    root.geometry("600x600")
 
     frame = tk.Frame(root)
     frame.pack(expand=True)
