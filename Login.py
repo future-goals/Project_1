@@ -31,7 +31,7 @@ def main():
     root.geometry("600x520")
     root.configure(bg="#121212")
 
-    title_font = ("Consolas", 30, "bold")
+    title_font = ("Consolas", 40, "bold")
     label_font = ("Consolas", 11)
     entry_font = ("Consolas", 11)
 
@@ -58,7 +58,7 @@ def main():
 #---------------Shoow-Password---------------
 
     show_pass = tk.BooleanVar()
-    tk. Checkbutton(root, text="Show Password", variable=show_pass, command=toggle_password, bg="#1e1e1e", fg="#e0e0e0").pack(pady=5)
+    tk. Checkbutton(root, text="Show Password", variable=show_pass, command=toggle_password, bg="#121212", fg="#ffffff",relief="flat", activebackground="#121212", activeforeground="#ffffff", cursor="hand2").pack(pady=5)
 
 #----------------Button------------------
 
