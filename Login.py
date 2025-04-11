@@ -38,7 +38,7 @@ def main():
     frame = tk.Frame(root, bg="#1e1e1e")
     frame.pack(expand=True)
 
-    title = tk.Label(root, text="Welcom", font=title_font, bg="#121212", fg="#00bfff")
+    title = tk.Label(root, text="Login", font=title_font, bg="#121212", fg="#00bfff")
     title.pack(pady=(40, 20))
 
 #--------------Username----------------
