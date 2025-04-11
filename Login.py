@@ -15,23 +15,23 @@ def login():
 def main():
     root = tk.Tk()
     root.title("🌟 Login Portal 🌟")
-    root.geometry("400x320")
+    root.geometry("600x520")
     root.configure(bg="#FFFDF2")
 
     frame = tk.Frame(root, bg="#FFFDF2")
     frame.pack(expand=True)
 
-    title = tk.Label(frame, text="Welcome", font=("Comic Sans MS", 22, "bold"), bg="#FFFDF2", fg="#000000")
+    title = tk.Label(frame, text="Welcome", font=("Comic Sans MS", 23, "bold"), bg="#FFFDF2", fg="#000000")
     title.pack(pady=15)
 
-    tk.Label(frame, text="Username:", bg="#FFFDF2").pack()
+    tk.Label(frame, text="Username:",font=("Arial", 13), bg="#FFFDF2").pack()
     global username_entry
-    username_entry = tk.Entry(frame, font=("Arial", 12), justify="center", bg="#ffffff", relief="groove", bd=2)
+    username_entry = tk.Entry(frame, font=("Arial", 15), justify="center", bg="#ffffff", relief="groove", bd=2)
     username_entry.pack(pady=5)
 
-    tk.Label(frame, text="Password:", bg="#FFFDF2").pack()
+    tk.Label(frame, text="Password:",font=("Arial", 13), bg="#FFFDF2").pack()
     global password_entry
-    password_entry = tk.Entry(frame, show="*", font=("Arial", 12), justify="center", bg="#ffffff", relief="groove", bd=2)
+    password_entry = tk.Entry(frame, show="*", font=("Arial", 15), justify="center", bg="#ffffff", relief="groove", bd=2)
     password_entry.pack(pady=5)
 
     login_button = tk.Button(frame, text="Log In", font=("Arial", 12, "bold"), bg="#b19cd9", fg="white", command=login)
