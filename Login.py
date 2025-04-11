@@ -1,13 +1,19 @@
 import tkinter as tk
 from tkinter import messagebox
+from auth import authenticate, get_user_details, add_user
 
 
 def login():
     username = username_entry.get()
     password = password_entry.get()
-    
-    if username == "admin" and password == "password":
-        messagebox.showinfo("🌟 Login Successful", f"Welcome, {username}!🥳")
+
+    role = authenticate(username, password)
+    if role:
+        user = get_user_details(username)
+        if user:
+            messagebox.showinfo("🌟 Login Successful", f"Welcome, {username}!🥳")
+        else:
+            messagebox.showwarning("Login", "User details not found")
     else:
         messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
 
