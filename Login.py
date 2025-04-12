@@ -1,17 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import font
-
-users = {
-    "admin": "admin123",
-    "unicorn": "rainbow",
-    "pikachu": "thunderbolt"
-}
+from auth import authenticate
 
 def login():
    username = username_entry.get()
    password = password_entry.get()
-   if username in users and users[username] == password:
+   if authenticate(username, password):
         messagebox.showinfo("🌟 Login Successful", f"Welcome, {username}!🥳")
    else:
         messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
