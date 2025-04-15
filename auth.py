@@ -39,18 +39,15 @@ def get_user_details(username):
 
 def add_user(username, full_name, password, role):
     try:
-        # Check if user already exists
         with open("data/users.txt", "r") as file:
             for line in file:
                 stored_username, _, _ = line.strip().split(",")
                 if username == stored_username:
-                    return False  # Username already exists
+                    return False
 
-        # Append to users.txt
         with open("data/users.txt", "a") as file:
             file.write(f"{username},{full_name},{role}\n")
 
-        # Append to passwords.txt
         with open("data/passwords.txt", "a") as file:
             file.write(f"{username},{password},{role}\n")
 
