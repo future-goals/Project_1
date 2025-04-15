@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import font
-from auth import authenticate, get_user_details, add_user, delete_user
+from auth import authenticate, get_user_details, add_user, delete_user, get_student_eca, get_student_grades, update_student_profile
 
 def login():
    username = username_entry.get()
@@ -40,33 +40,39 @@ def admin_dashboard(user):
         add_user_window.title("➕ Add User")
         add_user_window.geometry("400x350")
 
+        label_style = {"fg": "#20C997", "bg": "#121212", "font": ("Consolas", 11)}
+        entry_style = {"bg": "#1e1e1e", "fg": "#ffffff", "insertbackground": "#ffffff", "relief": "flat", "highlightthickness": 1, "highlightbackground": "#20C997", "highlightcolor": "#d4af37"}
+
 #----------------username----------------------------
 
-        tk.Label(add_user_window, text="👤 Username:"). pack(pady=5)
+        tk.Label(add_user_window, text="👤 Username:", **label_style). pack(pady=5)
         username_entry = tk.Entry(add_user_window)
         username_entry.pack(pady=5)
 
 #-----------------full name---------------------------
 
-        tk.Label(add_user_window, text="📛 Full Name:").pack(pady=5)
+        tk.Label(add_user_window, text="📛 Full Name:",**label_style).pack(pady=5)
         full_name_entry = tk.Entry(add_user_window)
         full_name_entry.pack(pady=5)
 
 #------------------password---------------------------
 
-        tk.Label(add_user_window, text="🔑 Password:").pack(pady=5)
+        tk.Label(add_user_window, text="🔑 Password:",**label_style).pack(pady=5)
         password_entry = tk.Entry(add_user_window, show="*")
         password_entry.pack(pady=5)
 
 #--------------------Role-----------------------------
 
-        tk.Label(add_user, text="🧑‍🏫 Role:").pack(pady=5)
+        tk.Label(add_user, text="🧑‍🏫 Role:",**label_style).pack(pady=5)
         role_var = tk.StringVar(value="Student")
-        tk.OptionMenu(add_user_window, role_var, "admin", "student").pack(pady=5)
+        role_menu = tk.OptionMenu(add_user_window, role_var, "admin", "student")
+        role_menu.config(bg="#1e1e1e", fg="#ffffff", highlightthickness=0, font=("Consolas", 10))
+        role_menu["menu"].config(bg="#1e1e1e", fg="#ffffff")
+        role_menu.pack(pady=5)
 
 #---------------------Button--------------------------
 
-        tk.Button(add_user_window, text="✅ Submit", command=submit).pack(pady=15)
+        tk.Button(add_user_window, text="✅ Submit", bg="#FFD700", fg="#121212", activebackground="#f5d742", relief="flat", font=("Consolas", 11), command=submit,  cursor="hand2").pack(pady=15)
 
     def delete_user_ui():
         def submit():
@@ -81,26 +87,29 @@ def admin_dashboard(user):
         delete_user_window.title("🗑️ Delete User")
         delete_user_window.geometry("300x200")
 
-        tk.Label(delete_user_window, text="Username to delete:").pack(pady=10)
-        username_entry = tk.Entry(delete_user_window)
+        tk.Label(delete_user_window, text="Username to delete:", fg="#20C997", bg="#121212", font=("Consolas", 11)).pack(pady=10)
+        username_entry = tk.Entry(delete_user_window, bg="#1e1e1e", fg="#ffffff", insertbackground="#ffffff", relief="flat", highlightthickness=1, highlightbackground="#20C997", highlightcolor="#d4af37")
         username_entry.pack(pady=10)
 
-        tk.Button(delete_user_window, text="🗑️ Delete", command=submit).pack(pady=10)
+        tk.Button(delete_user_window, text="🗑️ Delete", bg="#FFD700", fg="#121212", activebackground="#f5d742", relief="flat", font=("Consolas", 11), command=submit, cursor="hand2").pack(pady=10)
 
     admin_window = tk.Toplevel()
     admin_window.title("⚙️ Admin Dashboard")
     admin_window.geometry("400x300")
 
 #-------------------Header-------------------
-    tk.Label(admin_window, text=f"👋 Welcome, {user.full_name}!", font=("Arial", 16, "bold")).pack(pady=15)
+    tk.Label(admin_window, text=f"👋 Welcome, {user.full_name}!",fg="#d4af37", bg="#121212", font=("Consolas", 16, "bold")).pack(pady=15)
 
 #------------------Button Frame---------------
-    button_frame = tk.Frame(admin_window)
+    button_frame = tk.Frame(admin_window, bg="#121212")
     button_frame.pack(pady=10)
 
-    tk.Button(button_frame, text="➕ Add User", width=20, command=add_user_ui).pack(pady=5)
-    tk.Button(button_frame, text="🗑️ Delete User", width=20, command=delete_user_ui).pack(pady=5)
-    tk.Button(button_frame, text="🔙 Back / Exit", width=20, command=admin_window.destroy).pack(pady=20)
+    def themed_button(text, cmd):
+        return tk.Button(button_frame, text=text, width=20, bg="#20C997", fg="#121212", activebackground="#1dd4a1", font=("Consolas", 11), command=cmd, relief="flat", cursor="hand2")
+
+    themed_button("➕ Add User", add_user_ui).pack(pady=5)
+    themed_button("🗑️ Delete User", delete_user_ui).pack(pady=5)
+    themed_button("🔙 Back / Exit", admin_window.destroy).pack(pady=20)
 
 
 def student_dashboard(user):
