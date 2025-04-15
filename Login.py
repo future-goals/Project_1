@@ -15,13 +15,17 @@ def login():
          if role == "admin":
              admin_dashboard(user)
          elif role == "student":
-             student_dahboard(user)
+             student_dashboard(user)
    else:
         messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
 
 def admin_dashboard(user):
 
-    messagebox.showinfo("Admin Dashboard", f"🤗 Welcome, {user.full_name} to Admin Dashboard")
+    messagebox.showinfo("Admin Dashboard", f"🤗 Welcome, {user.full_name} 🤝")
+
+def student_dashboard(user):
+
+    messagebox.showinfo("Student Dashboard", f"Welcome {user.full_name} 👔")
 
 def toggle_password():
     if show_pass.get():
