@@ -10,6 +10,10 @@ def authenticate(username, password):
     try:
         with open("data/password.txt", "r") as file:
             for line in file:
+                fields = line.strip().split(",")
+                if len(fields) != 3:
+                   print(f"Invalide line format in password.txt:{line.strip()}")
+                   continue
                 stored_username, stored_password = line.strip().split(",")
                 if username == stored_username and password == stored_password:
                     return True
@@ -35,7 +39,7 @@ def get_user_details(username):
 
 def delete_user(username):
     try:
-        # Delete from users.txt
+        
         with open("data/users.txt", "r") as file:
             lines = file.readlines()
         with open("data/users.txt", "w") as file:
@@ -43,7 +47,7 @@ def delete_user(username):
                 if not line.startswith(username + ","):
                     file.write(line)
 
-        # Delete from passwords.txt
+        
         with open("data/passwords.txt", "r") as file:
             lines = file.readlines()
         with open("data/passwords.txt", "w") as file:
