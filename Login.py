@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import font
-from auth import authenticate, get_user_details
+from auth import authenticate, get_user_details, add_user, delete_user
 
 def login():
    username = username_entry.get()
@@ -20,8 +20,63 @@ def login():
         messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
 
 def admin_dashboard(user):
+    """
+    Admin Admin Dashboard
+    """
+    def add_user_ui():
+        def submit():
+            new_username = username_entry.get()
+            new_full_name = new_full_name.get()
+            new_password = password_entry.get()
+            new_role = role_var.get()
 
-    messagebox.showinfo("Admin Dashboard", f"🤗 Welcome, {user.full_name} 🤝")
+            if add_user(new_username, new_password, new_full_name, new_role):
+                messagebox.showinfo("✅ Success", "User added sucessfully!")
+                add_user_window.destroy()
+            else:
+                messagebox.showerror("❌ Error", "Failed to add user 😵‍💫 Username might already exist.")
+
+        add_user_window = tk.Toplevel()
+        add_user_window.title("➕ Add User")
+        add_user_window.geometry("400x350")
+
+#----------------username----------------------------
+
+        tk.Label(add_user_window, text="👤 Username:"). pack(pady=5)
+        username_entry = tk.Entry(add_user_window)
+        username_entry.pack(pady=5)
+
+#-----------------full name---------------------------
+
+        tk.Label(add_user_window, text="📛 Full Name:").pack(pady=5)
+        full_name_entry = tk.Entry(add_user_window)
+        full_name_entry.pack(pady=5)
+
+#------------------password---------------------------
+
+        tk.Label(add_user_window, text="🔑 Password:").pack(pady=5)
+        password_entry = tk.Entry(add_user_window, show="*")
+        password_entry.pack(pady=5)
+
+#--------------------Role-----------------------------
+
+        tk.Label(add_user, text="🧑‍🏫 Role:").pack(pady=5)
+        role_var = tk.StringVar(value="Student")
+        tk.OptionMenu(add_user_window, role_var, "admin", "student").pack(pady=5)
+
+#---------------------Button--------------------------
+
+        tk.Button(add_user_window, text="✅ Submit", command=submit).pack(pady=15)
+
+def delete_user_ui():
+    def submit():
+        username_to_delete = username_entry.get()
+        if delete_user(username_to_delete):
+            messagebox.showinfo("✅ Success", "User delted successfully!")
+            delete_user_window.distroy()
+        else:
+            messagebox.showerror("❌ Error", "Failed to delete user. Username might exist.")
+
 
 def student_dashboard(user):
 
