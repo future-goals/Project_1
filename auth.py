@@ -59,3 +59,49 @@ def delete_user(username):
     except Exception as e:
         print(f"Error: {e}")
         return False
+    
+def get_student_grades(username):
+    try:
+        with open("data/grades.txt", "r") as file:
+            for line in file:
+                stored_username, *grades = line.strip().split(",")
+                if username == stored_username:
+                    return grades
+    except FileNotFoundError:
+        print("Error: grades.txt file not found.")
+    except Exception as e:
+        print(f"Error: {e}")
+    return None
+
+def get_student_eca(username):
+    try:
+        with open("data/eca.txt", "r") as file:
+            for line in file:
+                stored_username, *activities = line.strip().split(",")
+                if username == stored_username:
+                    return activities
+    except FileNotFoundError:
+        print("Error: eca.txt file not found.")
+    except Exception as e:
+        print(f"Error: {e}")
+    return None
+
+def update_student_profile(username, full_name):
+    try:
+        updated = False
+        with open("data/users.txt", "r") as file:
+            lines = file.readlines()
+        with open("data/users.txt", "w") as file:
+            for line in lines:
+                stored_username, _, role = line.strip().split(",")
+                if username == stored_username:
+                    file.write(f"{username},{full_name},{role}\n")
+                    updated = True
+                else:
+                    file.write(line)
+        return updated
+    except FileNotFoundError:
+        print("Error: users.txt file not found.")
+    except Exception as e:
+        print(f"Error: {e}")
+    return False
