@@ -1,15 +1,27 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import font
-from auth import authenticate
+from auth import authenticate, get_user_details
 
 def login():
    username = username_entry.get()
    password = password_entry.get()
-   if authenticate(username, password):
-        messagebox.showinfo("🌟 Login Successful", f"Welcome, {username}!🥳")
+
+   role = authenticate(username, password)
+   if role:
+      user = get_user_details(username)
+      if user:
+         messagebox.showinfo("🌟 Login Successful", f"Welcome, {user.full_name}({user.role})!🥳")
+         if role == "admin":
+             admin_dashboard(user)
+         elif role == "student":
+             student_dahboard(user)
    else:
         messagebox.showerror("🚫 Login Failed", "Oops!! Try again.😥")
+
+def admin_dashboard(user):
+
+    messagebox.showinfo("Admin Dashboard", f"🤗 Welcome, {user.full_name} to Admin Dashboard")
 
 def toggle_password():
     if show_pass.get():
