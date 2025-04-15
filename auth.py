@@ -1,3 +1,11 @@
+import os
+
+class User:
+    def __init__(self,username,full_name,role):
+     self.username = username
+     self.full_name = full_name
+     self.role= role
+
 def authenticate(username, password):
     try:
         with open("data/password.txt", "r") as file:
@@ -11,3 +19,4 @@ def authenticate(username, password):
         print(f"Error: {e}")
     
     return False
+
