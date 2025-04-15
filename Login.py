@@ -68,14 +68,39 @@ def admin_dashboard(user):
 
         tk.Button(add_user_window, text="✅ Submit", command=submit).pack(pady=15)
 
-def delete_user_ui():
-    def submit():
-        username_to_delete = username_entry.get()
-        if delete_user(username_to_delete):
-            messagebox.showinfo("✅ Success", "User delted successfully!")
-            delete_user_window.distroy()
-        else:
-            messagebox.showerror("❌ Error", "Failed to delete user. Username might exist.")
+    def delete_user_ui():
+        def submit():
+            username_to_delete = username_entry.get()
+            if delete_user(username_to_delete):
+               messagebox.showinfo("✅ Success", "User delted successfully!")
+               delete_user_window.distroy()
+            else:
+                messagebox.showerror("❌ Error", "Failed to delete user. Username might exist.")
+
+        delete_user_window = tk.Toplevel()
+        delete_user_window.title("🗑️ Delete User")
+        delete_user_window.geometry("300x200")
+
+        tk.Label(delete_user_window, text="Username to delete:").pack(pady=10)
+        username_entry = tk.Entry(delete_user_window)
+        username_entry.pack(pady=10)
+
+        tk.Button(delete_user_window, text="🗑️ Delete", command=submit).pack(pady=10)
+
+    admin_window = tk.Toplevel()
+    admin_window.title("⚙️ Admin Dashboard")
+    admin_window.geometry("400x300")
+
+#-------------------Header-------------------
+    tk.Label(admin_window, text=f"👋 Welcome, {user.full_name}!", font=("Arial", 16, "bold")).pack(pady=15)
+
+#------------------Button Frame---------------
+    button_frame = tk.Frame(admin_window)
+    button_frame.pack(pady=10)
+
+    tk.Button(button_frame, text="➕ Add User", width=20, command=add_user_ui).pack(pady=5)
+    tk.Button(button_frame, text="🗑️ Delete User", width=20, command=delete_user_ui).pack(pady=5)
+    tk.Button(button_frame, text="🔙 Back / Exit", width=20, command=admin_window.destroy).pack(pady=20)
 
 
 def student_dashboard(user):
