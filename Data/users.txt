@@ -1,2 +1,2 @@
 admin,Admin,User,admin
-student1,Sudan Pudasaini,student
+student1,Durga prasai,student
